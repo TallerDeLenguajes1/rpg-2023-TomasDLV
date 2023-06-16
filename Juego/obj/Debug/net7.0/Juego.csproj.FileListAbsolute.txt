@@ -1,0 +1,17 @@
+C:\Users\tomas\OneDrive\Desktop\3er año\Repositorio Taller1\rpg-2023-TomasDLV\Juego\bin\Debug\net7.0\Juego.exe
+C:\Users\tomas\OneDrive\Desktop\3er año\Repositorio Taller1\rpg-2023-TomasDLV\Juego\bin\Debug\net7.0\Juego.deps.json
+C:\Users\tomas\OneDrive\Desktop\3er año\Repositorio Taller1\rpg-2023-TomasDLV\Juego\bin\Debug\net7.0\Juego.runtimeconfig.json
+C:\Users\tomas\OneDrive\Desktop\3er año\Repositorio Taller1\rpg-2023-TomasDLV\Juego\bin\Debug\net7.0\Juego.dll
+C:\Users\tomas\OneDrive\Desktop\3er año\Repositorio Taller1\rpg-2023-TomasDLV\Juego\bin\Debug\net7.0\Juego.pdb
+C:\Users\tomas\OneDrive\Desktop\3er año\Repositorio Taller1\rpg-2023-TomasDLV\Juego\obj\Debug\net7.0\Juego.csproj.AssemblyReference.cache
+C:\Users\tomas\OneDrive\Desktop\3er año\Repositorio Taller1\rpg-2023-TomasDLV\Juego\obj\Debug\net7.0\Juego.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\tomas\OneDrive\Desktop\3er año\Repositorio Taller1\rpg-2023-TomasDLV\Juego\obj\Debug\net7.0\Juego.AssemblyInfoInputs.cache
+C:\Users\tomas\OneDrive\Desktop\3er año\Repositorio Taller1\rpg-2023-TomasDLV\Juego\obj\Debug\net7.0\Juego.AssemblyInfo.cs
+C:\Users\tomas\OneDrive\Desktop\3er año\Repositorio Taller1\rpg-2023-TomasDLV\Juego\obj\Debug\net7.0\Juego.csproj.CoreCompileInputs.cache
+C:\Users\tomas\OneDrive\Desktop\3er año\Repositorio Taller1\rpg-2023-TomasDLV\Juego\obj\Debug\net7.0\Juego.dll
+C:\Users\tomas\OneDrive\Desktop\3er año\Repositorio Taller1\rpg-2023-TomasDLV\Juego\obj\Debug\net7.0\refint\Juego.dll
+C:\Users\tomas\OneDrive\Desktop\3er año\Repositorio Taller1\rpg-2023-TomasDLV\Juego\obj\Debug\net7.0\Juego.pdb
+C:\Users\tomas\OneDrive\Desktop\3er año\Repositorio Taller1\rpg-2023-TomasDLV\Juego\obj\Debug\net7.0\Juego.genruntimeconfig.cache
+C:\Users\tomas\OneDrive\Desktop\3er año\Repositorio Taller1\rpg-2023-TomasDLV\Juego\obj\Debug\net7.0\ref\Juego.dll
+C:\Users\tomas\OneDrive\Desktop\3er año\Repositorio Taller1\rpg-2023-TomasDLV\Juego\bin\Debug\net7.0\Newtonsoft.Json.dll
+C:\Users\tomas\OneDrive\Desktop\3er año\Repositorio Taller1\rpg-2023-TomasDLV\Juego\obj\Debug\net7.0\Juego.csproj.CopyComplete

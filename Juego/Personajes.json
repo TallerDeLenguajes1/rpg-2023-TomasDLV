@@ -4,3 +4,8 @@
 {"Tipo":"Arquero","Nombre":"Mar\u00EDa","Apodo":"ElSabio","FechaNac":"2018-05-30T00:00:00","Edad":5,"Velocidad":1,"Vida":0}
 {"Tipo":"Arquero","Nombre":"Luis","Apodo":"ElR\u00E1pido","FechaNac":"1997-12-27T00:00:00","Edad":26,"Velocidad":9,"Vida":0}
 {"Tipo":"Mago","Nombre":"Pedro","Apodo":"ElR\u00E1pido","FechaNac":"2022-05-13T00:00:00","Edad":1,"Velocidad":1,"Vida":0}
+{"Tipo":"Mago","Nombre":"Pedro","Apodo":"ElSigiloso","FechaNac":"1993-02-08T00:00:00","Edad":30,"Velocidad":6,"Destreza":3,"Fuerza":5,"Nivel":8,"Armadura":1,"Salud":100}
+{"Tipo":"Mago","Nombre":"Pedro","Apodo":"ElSabio","FechaNac":"1981-03-15T00:00:00","Edad":42,"Velocidad":9,"Destreza":2,"Fuerza":4,"Nivel":4,"Armadura":5,"Salud":100}
+{"Tipo":"Mago","Nombre":"Ana","Apodo":"ElSigiloso","FechaNac":"1756-04-17T00:00:00","Edad":267,"Velocidad":9,"Destreza":1,"Fuerza":3,"Nivel":7,"Armadura":3,"Salud":100}
+{"Tipo":"Mago","Nombre":"Pedro","Apodo":"ElSabio","FechaNac":"2005-11-27T00:00:00","Edad":18,"Velocidad":8,"Destreza":2,"Fuerza":3,"Nivel":2,"Armadura":9,"Salud":100}
+{"Tipo":"Mago","Nombre":"Ana","Apodo":"ElSigiloso","FechaNac":"1802-04-12T00:00:00","Edad":221,"Velocidad":3,"Destreza":2,"Fuerza":5,"Nivel":6,"Armadura":7,"Salud":100}

@@ -1,5 +1,6 @@
 ﻿using System.Text.Json;
 using System.Text.Json.Serialization;
+using System.IO;
 
 public enum listaTipos
 {
@@ -26,7 +27,7 @@ public enum listaApodos
     ElValiente
 }
 
-public class Personajes
+public class Personaje
 {
     private string tipo;
     private string nombre;
@@ -61,15 +62,7 @@ public class Personajes
         Console.WriteLine("Edad: " + Edad);
         Console.WriteLine("Velocidad: " + Velocidad);
     }
-    public void GuardarPersonajeJson( string nombreArchivo,string formato){
-        FileStream miArchivo = new FileStream(nombreArchivo + formato, FileMode.Append);
-        string strPersonaje = JsonSerializer.Serialize(this);
-        using (StreamWriter StrWriter = new StreamWriter(miArchivo))
-        {
-            StrWriter.WriteLine("{0}",strPersonaje);
-            StrWriter.Close();
-        }
-    }
+    
     
 }
 
@@ -77,9 +70,9 @@ class FabricaPersonajes
 {
     Random rand = new Random();
 
-    public Personajes CrearPersonajeAleatorio()
+    public Personaje CrearPersonajeAleatorio()
     {
-        Personajes PJ = new Personajes();
+        Personaje PJ = new Personaje();
         PJ.Tipo = Enum.GetName(typeof(listaTipos),rand.Next(1,Enum.GetNames(typeof(listaTipos)).Length));
         PJ.Nombre = Enum.GetName(typeof(listaNombres),rand.Next(1,Enum.GetNames(typeof(listaNombres)).Length));
         PJ.Apodo = Enum.GetName(typeof(listaApodos),rand.Next(1,Enum.GetNames(typeof(listaApodos)).Length));
@@ -103,18 +96,60 @@ class FabricaPersonajes
     }
 }
 
+public class PersonajesJson{
+    public List<Personaje> LeerPersonajes(string nombreArchivo)
+    {
+        List<Personaje> listPersonajes = new List<Personaje>();
+
+        string contenido = File.ReadAllText(nombreArchivo);
+        listPersonajes = JsonSerializer.Deserialize<List<Personaje>>(contenido)!;
+
+        return listPersonajes;
+    }
+    public void GuardarPersonajes( string nombreArchivo,List<Personaje> personajes){
+        string contenido = JsonSerializer.Serialize(personajes);
+        File.WriteAllText(nombreArchivo, contenido);
+    }
+    public bool Existe(string nombreArchivo)
+{
+    if (File.Exists(nombreArchivo))
+    {
+        string contenido = File.ReadAllText(nombreArchivo);
+        return !string.IsNullOrEmpty(contenido);
+    }
+
+    return false;
+}
+}
+
 class Program
 {
-    static void Main(string[] args)
+    void Main(string[] args)
     {
-        FabricaPersonajes fabrica = new FabricaPersonajes();
-
-        for (int i = 0; i < 5; i++)
+        string nombreArchivo = "Personajes.json";
+        PersonajesJson personajesJson = new PersonajesJson();
+        List<Personaje> personajes;
+        
+        if (personajesJson.Existe(nombreArchivo))
         {
-            Personajes personaje = fabrica.CrearPersonajeAleatorio();
+            personajes = personajesJson.LeerPersonajes(nombreArchivo);
+        }else
+        {
+            FabricaPersonajes fabrica = new FabricaPersonajes();
+            personajes = new List<Personaje>();
+
+            for (int i = 0; i < 10; i++)
+            {
+                Personaje personaje = fabrica.CrearPersonajeAleatorio();
+                personajes.Add(personaje);
+            }
+
+            personajesJson.GuardarPersonajes(nombreArchivo, personajes);
+        }
+        foreach (Personaje personaje in personajes)
+        {
             personaje.MostrarDatos();
             Console.WriteLine("----------------------");
-            personaje.GuardarPersonajeJson("Personajes",".json");
         }
 
         Console.ReadLine();

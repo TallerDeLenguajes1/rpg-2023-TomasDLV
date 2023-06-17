@@ -62,7 +62,16 @@ public class Personaje
         Console.WriteLine("Edad: " + Edad);
         Console.WriteLine("Velocidad: " + Velocidad);
     }
-    
+    public int Atacar(Personaje defensor){
+        Random rand = new Random();
+        int ataque = this.Destreza * this.Fuerza * this.Nivel;
+        int efectividad = rand.Next(1,100);
+        int defensa = defensor.Armadura * defensor.Velocidad;
+        const int Ajuste = 500;
+        int dañoProvocado = (ataque*efectividad)-defensa/(Ajuste);
+        defensor.Salud = defensor.Salud - dañoProvocado;
+        return dañoProvocado;
+    }
     
 }
 
@@ -102,7 +111,11 @@ public class PersonajesJson{
         List<Personaje> listPersonajes = new List<Personaje>();
 
         string contenido = File.ReadAllText(nombreArchivo);
-        listPersonajes = JsonSerializer.Deserialize<List<Personaje>>(contenido)!;
+        listPersonajes = JsonSerializer.Deserialize<List<Personaje>>(contenido);
+    if (listPersonajes == null)
+    {
+        listPersonajes = new List<Personaje>(); // Otra acción apropiada en caso de deserialización nula
+    }
 
         return listPersonajes;
     }
@@ -124,7 +137,7 @@ public class PersonajesJson{
 
 class Program
 {
-    void Main(string[] args)
+    static void Main(string[] args)
     {
         string nombreArchivo = "Personajes.json";
         PersonajesJson personajesJson = new PersonajesJson();
@@ -151,8 +164,24 @@ class Program
             personaje.MostrarDatos();
             Console.WriteLine("----------------------");
         }
-
-        Console.ReadLine();
+        Random rand = new Random();
+        Personaje luchador1 = personajes[rand.Next(0,9)];
+        Personaje luchador2 = personajes[rand.Next(0,9)];
+        while (luchador1.Salud > 0 && luchador2.Salud > 0)
+        {
+            luchador1.Atacar(luchador1);
+            if (luchador2.Salud > 0)
+            {
+                luchador2.Atacar(luchador1);
+                if (luchador1.Salud <= 0)
+                {
+                    Console.WriteLine("Ganador... Luchador2 !!");
+                }
+            }else
+            {
+                Console.WriteLine("Ganador... Luchador1 !!");
+            }
+        }
     }
     
     

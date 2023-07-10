@@ -112,10 +112,10 @@ public class PersonajesJson{
 
         string contenido = File.ReadAllText(nombreArchivo);
         listPersonajes = JsonSerializer.Deserialize<List<Personaje>>(contenido);
-    if (listPersonajes == null)
-    {
-        listPersonajes = new List<Personaje>(); // Otra acción apropiada en caso de deserialización nula
-    }
+        if (listPersonajes == null)
+        {
+            listPersonajes = new List<Personaje>(); // Otra acción apropiada en caso de deserialización nula
+        }
 
         return listPersonajes;
     }
@@ -167,6 +167,8 @@ class Program
         Random rand = new Random();
         Personaje luchador1 = personajes[rand.Next(0,9)];
         Personaje luchador2 = personajes[rand.Next(0,9)];
+
+        
         while (luchador1.Salud > 0 && luchador2.Salud > 0)
         {
             luchador1.Atacar(luchador1);

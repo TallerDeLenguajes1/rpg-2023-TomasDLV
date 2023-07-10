@@ -1,0 +1,46 @@
+Título del juego: Pokémon Battle Console
+
+Resumen:
+"Pokémon Battle Console" es un juego de consola basado en la temática de Pokémon, donde los jugadores podrán disfrutar de emocionantes batallas de un solo Pokémon. Podrán crear un personaje, seleccionar un Pokémon inicial aleatorio y enfrentarse a entrenadores controlados por la computadora. El objetivo es ganar batallas, ganar experiencia y mejorar al Pokémon del jugador.
+
+Características principales:
+
+1. Interfaz de inicio del juego:
+   - Al iniciar el juego, se mostrará un ASCII art del título "Pokémon Battle Console" como parte de la interfaz de inicio.
+   - Se presentará un menú con las siguientes opciones:
+     a) "Crear entrenador": Permite al jugador ingresar el nombre del entrenador y seleccionar una de tres Poké Balls para recibir un Pokémon inicial aleatorio.
+     b) "Cargar entrenador": Muestra un listado de entrenadores previamente cargados en un archivo JSON. El jugador podrá seleccionar uno de ellos para cargarlo.
+
+2. Creación de personaje:
+   - Al seleccionar "Crear entrenador", se solicitará al jugador que ingrese el nombre del entrenador.
+   - A continuación, se mostrarán tres Poké Balls en pantalla.
+   - El jugador deberá elegir una de ellas, y se le asignará un Pokémon inicial aleatorio de la lista predefinida para esa Poké Ball.
+   - El nivel del entrenador se establecerá en 1.
+
+3. Cargar entrenador:
+   - Al seleccionar "Cargar entrenador", se mostrará un listado de entrenadores previamente cargados en un archivo JSON.
+   - El jugador podrá navegar por la lista y seleccionar un entrenador cargado previamente.
+   - Una vez cargado el entrenador, se mostrará un resumen de su nombre y Pokémon inicial, y se ofrecerán opciones adicionales, como iniciar una pelea, ver estadísticas, ir al Centro Pokémon o cambiar de entrenador.
+
+4. Pelea:
+   - Al iniciar una pelea, se generará un oponente de manera aleatoria con un Pokémon aleatorio.
+   - Los ataques del oponente serán seleccionados de manera aleatoria.
+   - Durante la batalla, el jugador deberá elegir entre los cuatro tipos de ataques de su Pokémon o la opción de escapar.
+   - Si el jugador pierde la batalla, su Pokémon será enviado automáticamente al Centro Pokémon para curarse. Se le recomendará al jugador que visite el Centro Pokémon antes de jugar de nuevo.
+   - Si el jugador escapa de la batalla, el Pokémon conservará los puntos de salud resultantes de la batalla.
+
+5. Centro Pokémon:
+   - Se agregará la opción "Ir al Centro Pokémon" en el menú del entrenador.
+   - Al seleccionar esta opción, el Pokémon del entrenador será curado y su salud se reiniciará.
+   - Esto permitirá al jugador recuperarse y continuar con nuevas batallas.
+
+6. Estadísticas del entrenador:
+   - Se agregará la opción "Ver estadísticas" en el menú del entrenador.
+   - Al seleccionar esta opción, se mostrará en pantalla el nombre del entrenador, su nivel, su Pokémon, el nivel de su Pokémon, su experiencia, sus ataques y su salud actual.
+
+7. Cambiar de entrenador:
+   - Se agregará la opción "Cambiar de entrenador" en el menú del entrenador.
+   - Al seleccionar esta opción, el jugador volverá al menú de cargar o crear entrenador para seleccionar otro entrenador.
+
+Objetivo del juego: El objetivo principal del juego "Pokémon Battle Console" es que los jugadores mejoren a su Pokémon a través de batallas, ganen experiencia y se conviertan en un entrenador Pokémon poderoso.
+

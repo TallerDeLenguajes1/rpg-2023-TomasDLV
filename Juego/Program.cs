@@ -1,31 +1,10 @@
-﻿using System.Text.Json;
+﻿using System.IO;
+using System.Net;
+using System.Text.Json;
 using System.Text.Json.Serialization;
-using System.IO;
+using clasePokemon;
+using claseMoves;
 
-public enum listaTipos
-{
-    Guerrero,
-    Mago,
-    Arquero
-}
-
-public enum listaNombres
-{
-    Juan,
-    María,
-    Pedro,
-    Ana,
-    Luis
-}
-
-public enum listaApodos
-{
-    ElBravo,
-    ElSabio,
-    ElRápido,
-    ElSigiloso,
-    ElValiente
-}
 
 public class Personaje
 {
@@ -135,11 +114,12 @@ public class PersonajesJson{
 }
 }
 
+
 class Program
 {
     static void Main(string[] args)
     {
-        string nombreArchivo = "Personajes.json";
+     /* string nombreArchivo = "Personajes.json";
         PersonajesJson personajesJson = new PersonajesJson();
         List<Personaje> personajes;
         
@@ -183,9 +163,88 @@ class Program
             {
                 Console.WriteLine("Ganador... Luchador1 !!");
             }
+        }*/
+        Random rand = new Random();
+        try
+        {
+            int id; 
+            id = rand.Next(1,151);
+            PokemonApi pokemon = GetPokemon(id);
+            
+            Console.WriteLine("----------- Pokemon Encontrado -----------");
+            Console.WriteLine($"ID: {pokemon.Id}");
+            Console.WriteLine($"Name: {pokemon.Name}");
+            Console.WriteLine("Moves:");
+            foreach (Move move in pokemon.Moves)
+            {
+                MoveApi moves = GetMove(move.MoveInfo.Url);
+                foreach (var item in moves.names)
+                {
+                    if (item.language.name == "es")
+                    {
+                        Console.Write("\n" + item.name);
+                        Console.Write("-"+ move.MoveInfo.Name + "\n");
+                    }
+                }
+                
+            }
+            Console.WriteLine("Types:");
+            foreach (MoveType type in pokemon.Types)
+            {
+                Console.WriteLine(type.TypeInfo.Name);
+                
+            }
+
+
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error al consumir el servicio web: {ex.Message}");
+        }
+
+
+
+
+    }
+    static PokemonApi GetPokemon(int id)
+    {
+        var url = $"https://pokeapi.co/api/v2/pokemon/{id}";
+        var request = (HttpWebRequest)WebRequest.Create(url);
+        request.Method = "GET";
+        request.ContentType = "application/json";
+        request.Accept = "application/json";
+
+        using (WebResponse response = request.GetResponse())
+        {
+            using (Stream strReader = response.GetResponseStream())
+            {
+                using (StreamReader objReader = new StreamReader(strReader))
+                {
+                    string responseBody = objReader.ReadToEnd();
+                    return JsonSerializer.Deserialize<PokemonApi>(responseBody);
+                }
+            }
         }
     }
-    
+    static MoveApi GetMove(string url)
+    {
+        var request = (HttpWebRequest)WebRequest.Create(url);
+        request.Method = "GET";
+        request.ContentType = "application/json";
+        request.Accept = "application/json";
+
+        using (WebResponse response = request.GetResponse())
+        {
+            using (Stream strReader = response.GetResponseStream())
+            {
+                using (StreamReader objReader = new StreamReader(strReader))
+                {
+                    string responseBody = objReader.ReadToEnd();
+                    return JsonSerializer.Deserialize<MoveApi>(responseBody);
+                }
+            }
+        }
+    }
     
 }
 

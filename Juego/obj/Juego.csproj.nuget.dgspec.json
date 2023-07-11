@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\tomas\\OneDrive\\Desktop\\3er año\\Repositorio Taller1\\rpg-2023-TomasDLV\\Juego\\Juego.csproj": {}
+    "E:\\Tomas FACET\\3erAño\\Taller 1\\rpg-2023-TomasDLV\\Juego\\Juego.csproj": {}
   },
   "projects": {
-    "C:\\Users\\tomas\\OneDrive\\Desktop\\3er año\\Repositorio Taller1\\rpg-2023-TomasDLV\\Juego\\Juego.csproj": {
+    "E:\\Tomas FACET\\3erAño\\Taller 1\\rpg-2023-TomasDLV\\Juego\\Juego.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\tomas\\OneDrive\\Desktop\\3er año\\Repositorio Taller1\\rpg-2023-TomasDLV\\Juego\\Juego.csproj",
+        "projectUniqueName": "E:\\Tomas FACET\\3erAño\\Taller 1\\rpg-2023-TomasDLV\\Juego\\Juego.csproj",
         "projectName": "Juego",
-        "projectPath": "C:\\Users\\tomas\\OneDrive\\Desktop\\3er año\\Repositorio Taller1\\rpg-2023-TomasDLV\\Juego\\Juego.csproj",
-        "packagesPath": "C:\\Users\\tomas\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\tomas\\OneDrive\\Desktop\\3er año\\Repositorio Taller1\\rpg-2023-TomasDLV\\Juego\\obj\\",
+        "projectPath": "E:\\Tomas FACET\\3erAño\\Taller 1\\rpg-2023-TomasDLV\\Juego\\Juego.csproj",
+        "packagesPath": "C:\\Users\\TomasDLV\\.nuget\\packages\\",
+        "outputPath": "E:\\Tomas FACET\\3erAño\\Taller 1\\rpg-2023-TomasDLV\\Juego\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\tomas\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\TomasDLV\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net7.0"

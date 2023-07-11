@@ -1,10 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "Pcnkns7PKpcr1sssdHCiTIJQP+08NiFPBZm4EXW80nlgfWDMICZeZ6vr4YByPwUcmZiSJHFnhif99cH6SBng6Q==",
+  "dgSpecHash": "V2Jel8sWp39tduwHXJhCZozpof0tNk6oNkZ7MdJ0I9k6w2+TBQfA/ZTgAdeoLYr5vrlPPPYWy+CtEb3CMi4aYw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\tomas\\OneDrive\\Desktop\\3er año\\Repositorio Taller1\\rpg-2023-TomasDLV\\Juego\\Juego.csproj",
+  "projectFilePath": "E:\\Tomas FACET\\3erAño\\Taller 1\\rpg-2023-TomasDLV\\Juego\\Juego.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\tomas\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
+    "C:\\Users\\TomasDLV\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
   ],
   "logs": []
 }

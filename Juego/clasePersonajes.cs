@@ -59,7 +59,7 @@ namespace Personajes
         public int Edad { get => edad; set => edad = value; }
         public string Ciudad { get => ciudad; set => ciudad = value; }
         public DateTime FechaNac { get => fechaNac; set => fechaNac = value; }
-        internal PokemonInfo Pokemon { get => pokemon; set => pokemon = value; }
+        public PokemonInfo Pokemon { get => pokemon; set => pokemon = value; }
         public int Victorias { get => victorias; set => victorias = value; }
         public int Derrotas { get => derrotas; set => derrotas = value; }
         public void MostrarInformacion()
@@ -118,6 +118,17 @@ namespace Personajes
                 Console.WriteLine(movimiento);
             }
         }
+        public int Atacar(PokemonInfo defensor)
+            {
+                Random rand = new Random();
+                int ataque = Destreza * Fuerza * Nivel;
+                int efectividad = rand.Next(1, 100);
+                int defensa = defensor.Armadura * defensor.Velocidad;
+                const int Ajuste = 500;
+                int dañoProvocado = (ataque * efectividad) - defensa / (Ajuste);
+                defensor.Salud = defensor.Salud - dañoProvocado;
+                return dañoProvocado;
+            }
     }
     class EntrenadoresJson
     {
@@ -184,8 +195,9 @@ namespace Personajes
     {
         Random rand = new Random();
 
-        public Entrenador CrearEntrenadorRival(Entrenador player)
+        public static Entrenador CrearEntrenadorRival(Entrenador player)
         {
+            Random rand = new Random();
             var PJ = new Entrenador();
             PJ.Apodo = Enum.GetName(typeof(listaEntrenadores), rand.Next(1, Enum.GetNames(typeof(listaEntrenadores)).Length));
             PJ.FechaNac = ObtenerFechaNacimientoAleatoria();
@@ -195,10 +207,17 @@ namespace Personajes
             PJ.Victorias = rand.Next(5, 55);
             PJ.Derrotas = rand.Next(5, 55);
             return PJ;
+            DateTime ObtenerFechaNacimientoAleatoria()
+            {
+                DateTime fechaMin = new DateTime(1970, 1, 1);
+                int rango = (DateTime.Today - fechaMin).Days;
+                return fechaMin.AddDays(rand.Next(rango));
+            }
         }
         public static Entrenador CrearEntrenadorPlayer()
         {
             var PJ = new Entrenador();
+
 
             Console.Write("Ingrese el apodo del entrenador: ");
             PJ.Apodo = Console.ReadLine();
@@ -226,12 +245,7 @@ namespace Personajes
 
             return PJ;
         }
-        public DateTime ObtenerFechaNacimientoAleatoria()
-        {
-            DateTime fechaMin = new DateTime(1970, 1, 1);
-            int rango = (DateTime.Today - fechaMin).Days;
-            return fechaMin.AddDays(rand.Next(rango));
-        }
+
 
     }
     class CrearPokemon
@@ -271,6 +285,7 @@ namespace Personajes
             pokemon.MovimientosPosibles = listaMoves;
             pokemon.MovimientosActuales = listaMovActuales;
             return pokemon;
+            
         }
         private static int CalcularValorAleatorio(int valorBase)
         {
@@ -312,7 +327,7 @@ namespace Personajes
             }
             pokemon.MovimientosPosibles = listaMoves;
             pokemon.MovimientosActuales = listaMovActuales;
-
+            Pantalla.pantallaInicio.MostrarTitulo();
             Console.WriteLine("¡Se ha abierto la Pokébola!");
             Console.WriteLine("Has obtenido un Pokémon:");
             pokemon.MostrarDatosPokemon();

@@ -119,6 +119,67 @@ namespace Personajes
             }
         }
     }
+    class EntrenadoresJson
+    {
+        private List<Entrenador> listEntrenadores;
+        public string NombreArchivo = "entrenadores.json";
+
+        internal List<Entrenador> ListEntrenadores { get => listEntrenadores; set => listEntrenadores = value; }
+
+        public void LeerEntrenadores()
+        {
+            ListEntrenadores = new List<Entrenador>();
+            if (File.Exists(NombreArchivo) && new FileInfo(NombreArchivo).Length > 0)
+            {
+                string json = File.ReadAllText(NombreArchivo);
+                ListEntrenadores = JsonSerializer.Deserialize<List<Entrenador>>(json);
+            }
+        }
+        public void GuardarEntrenador(Entrenador entrenador)
+        {
+            // Primero, quitamos el entrenador existente de la lista
+            ListEntrenadores.RemoveAll(e => e.Apodo == entrenador.Apodo);
+
+            // Luego, actualizamos los datos del entrenador en la lista
+            ListEntrenadores.Add(entrenador);
+
+            // Finalmente, guardamos la lista actualizada en el archivo JSON
+            string contenido = JsonSerializer.Serialize(ListEntrenadores);
+            File.WriteAllText(NombreArchivo, contenido);
+        }
+        public Entrenador SeleccionarEntrenador()
+        {
+            Console.WriteLine("Entrenadores disponibles:");
+            int posicion = 1;
+            foreach (var entrenador in ListEntrenadores)
+            {
+                Console.WriteLine($"#{posicion} - Entrenador: {entrenador.Apodo}");
+                Console.WriteLine($"    Pokemon: {entrenador.Pokemon.Nombre}");
+                Console.WriteLine($"    Nivel: {entrenador.Pokemon.Nivel}");
+                Console.WriteLine();
+                posicion++;
+            }
+
+            while (true)
+            {
+                Console.Write("Seleccione un entrenador (número): ");
+                if (int.TryParse(Console.ReadLine(), out int seleccion))
+                {
+                    if (seleccion == 0)
+                    {
+                        return null; // Retorna null para indicar "Volver atrás"
+                    }
+
+                    if (seleccion >= 1 && seleccion <= ListEntrenadores.Count)
+                    {
+                        return ListEntrenadores[seleccion - 1];
+                    }
+                }
+
+                Console.WriteLine("Selección inválida. Intente nuevamente.");
+            }
+        }
+    }
     class CrearEntrenador
     {
         Random rand = new Random();
@@ -131,11 +192,11 @@ namespace Personajes
             PJ.Edad = DateTime.Today.Year - PJ.FechaNac.Year;
             PJ.Ciudad = Enum.GetName(typeof(listaCiudades), rand.Next(1, Enum.GetNames(typeof(listaCiudades)).Length));
             PJ.Pokemon = CrearPokemon.CrearPokemonAleatorio(player.Pokemon);
-            PJ.Victorias = rand.Next(5,55);
-            PJ.Derrotas = rand.Next(5,55);
+            PJ.Victorias = rand.Next(5, 55);
+            PJ.Derrotas = rand.Next(5, 55);
             return PJ;
         }
-        public Entrenador CrearEntrenadorPlayer()
+        public static Entrenador CrearEntrenadorPlayer()
         {
             var PJ = new Entrenador();
 
@@ -145,12 +206,17 @@ namespace Personajes
             Console.Write("Ingrese la ciudad del entrenador: ");
             PJ.Ciudad = Console.ReadLine();
 
-            Console.Write("Ingrese la fecha de nacimiento del entrenador (yyyy-MM-dd): ");
-            if (!DateTime.TryParse(Console.ReadLine(), out DateTime fechaNac))
+            Console.WriteLine("Ingrese la fecha de nacimiento del entrenador (yyyy-MM-dd): ");
+            DateTime fechaNac;
+
+            do
             {
-                Console.WriteLine("Fecha inválida. Se asignará una fecha aleatoria.");
-                fechaNac = ObtenerFechaNacimientoAleatoria();
-            }
+                if (!DateTime.TryParse(Console.ReadLine(), out fechaNac))
+                {
+                    Console.WriteLine("Fecha inválida. Intente nuevamente.");
+                }
+            } while (fechaNac == default(DateTime));
+
             PJ.FechaNac = fechaNac;
             PJ.Edad = DateTime.Today.Year - PJ.FechaNac.Year;
             PJ.Victorias = 0;
@@ -160,12 +226,13 @@ namespace Personajes
 
             return PJ;
         }
-        private DateTime ObtenerFechaNacimientoAleatoria()
+        public DateTime ObtenerFechaNacimientoAleatoria()
         {
             DateTime fechaMin = new DateTime(1970, 1, 1);
             int rango = (DateTime.Today - fechaMin).Days;
             return fechaMin.AddDays(rand.Next(rango));
         }
+
     }
     class CrearPokemon
     {

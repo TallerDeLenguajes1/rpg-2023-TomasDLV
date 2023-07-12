@@ -9,7 +9,7 @@ namespace Pantalla
             Console.WriteLine("Pokemon Battle Console");
             Console.WriteLine("*********************");
             Console.WriteLine();
-            
+
         }
         public static void MostrarMenuDeInicio()
         {
@@ -34,6 +34,11 @@ namespace Pantalla
             Console.WriteLine("4. Guardar y Salir");
             Console.WriteLine("5. Volver atrás");
             Console.WriteLine("-------------------------");
+        }
+        public static void PresionarParaContinuar()
+        {
+            Console.WriteLine("Presiona cualquier tecla para continuar...");
+            Console.ReadKey();
         }
     }
 }

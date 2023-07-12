@@ -36,6 +36,7 @@ class Program
                     player = listaDeEntrenadores.SeleccionarEntrenador();
                     if (player != null)
                     {
+                        pantallaInicio.MostrarTitulo();
                         Console.WriteLine("¡Bienvenido, " + player.Apodo + "!");
                         Thread.Sleep(2000);
                         if (Jugar(player) == 1)
@@ -109,7 +110,7 @@ class Program
                     Console.Clear();
                     // Aquí puedes implementar la lógica de las batallas
                     // y cualquier otra funcionalidad relacionada con las batallas
-                    if (player.Pokemon.Salud == 100)
+                    if (player.Pokemon.Salud == player.Pokemon.SaludMax)
                     {
                         Batalla.Empezar(player);
                         Thread.Sleep(2000);
@@ -125,7 +126,7 @@ class Program
                     Thread.Sleep(2000);
                     Console.Clear();
                     player.MostrarInformacion();
-                    Thread.Sleep(2000);
+                    pantallaInicio.PresionarParaContinuar();
                     break;
                 case "3":
                     string curar;
@@ -144,7 +145,7 @@ class Program
 
                     if (curar == "1")
                     {
-                        player.Pokemon.Salud = 100;
+                        player.Pokemon.Salud = player.Pokemon.SaludMax;
                         Console.WriteLine("");
                         Console.WriteLine($"{player.Pokemon.Nombre} Ha recibido atención médica");
                         Console.WriteLine("¡Tu Pokemon ha sido curado!");

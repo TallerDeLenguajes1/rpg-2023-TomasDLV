@@ -68,9 +68,10 @@ namespace Personajes
             Console.WriteLine("Apodo: " + Apodo);
             Console.WriteLine("Edad: " + Edad);
             Console.WriteLine("Ciudad: " + Ciudad);
+            Console.WriteLine("Victorias: " + Victorias);
+            Console.WriteLine("Derrotas: " + Derrotas);
             Console.WriteLine("Fecha de Nacimiento: " + FechaNac.ToString("yyyy-MM-dd"));
 
-            Console.WriteLine("Información del Pokémon:");
             pokemon.MostrarDatosPokemon();
         }
     }
@@ -84,7 +85,10 @@ namespace Personajes
         private int fuerza;//1 a 10
         private int nivel;//1 a 10
         private int armadura;//1 a 10
-        private int salud;//100
+        private int salud;// Salud actual
+        private int saludMax;//100
+        private int xpActual;
+        private int xpMax;
         private List<string> movimientosPosibles;
         private List<string> movimientosActuales;
 
@@ -100,12 +104,18 @@ namespace Personajes
         public int Salud { get => salud; set => salud = value; }
         public List<string> MovimientosPosibles { get => movimientosPosibles; set => movimientosPosibles = value; }
         public List<string> MovimientosActuales { get => movimientosActuales; set => movimientosActuales = value; }
+        public int XpActual { get => xpActual; set => xpActual = value; }
+        public int XpMax { get => xpMax; set => xpMax = value; }
+        public int SaludMax { get => saludMax; set => saludMax = value; }
+
         public void MostrarDatosPokemon()
         {
             Console.WriteLine("---Detalles del Pokémon---");
             Console.WriteLine("Nombre: " + Nombre);
             Console.WriteLine("ID: " + Id);
             Console.WriteLine("Nivel: " + Nivel);
+            Console.WriteLine("XP: " + XpActual);
+            Console.WriteLine("Proximo Nivel: " + XpMax);
             Console.WriteLine("Velocidad: " + Velocidad);
             Console.WriteLine("Destreza: " + Destreza);
             Console.WriteLine("Fuerza: " + Fuerza);
@@ -118,17 +128,46 @@ namespace Personajes
                 Console.WriteLine(movimiento);
             }
         }
-        public int Atacar(PokemonInfo defensor)
+        public void BonificarNivel()
+        {
+            if (XpActual >= XpMax)
             {
-                Random rand = new Random();
-                int ataque = Destreza * Fuerza * Nivel;
-                int efectividad = rand.Next(1, 100);
-                int defensa = defensor.Armadura * defensor.Velocidad;
-                const int Ajuste = 500;
-                int dañoProvocado = (ataque * efectividad) - defensa / (Ajuste);
-                defensor.Salud = defensor.Salud - dañoProvocado;
-                return dañoProvocado;
+                Nivel++;
+                XpActual = XpActual - XpMax;
+                XpMax = (int)(XpMax * 1.15);
+                
+                int bonoSalud = (int)(Salud * 0.15);
+                int bonoVelocidad = (int)ObtenerPorcentajeAleatorio(Velocidad);
+                int bonoDestreza = (int)ObtenerPorcentajeAleatorio(Destreza);
+                int bonoFuerza = (int)ObtenerPorcentajeAleatorio(Fuerza);
+                int bonoArmadura = (int)ObtenerPorcentajeAleatorio(Armadura);
+    
+                Salud += bonoSalud;
+                Velocidad += bonoVelocidad;
+                Destreza += bonoDestreza;
+                Fuerza += bonoFuerza;
+                Armadura += bonoArmadura;
+
+                Console.WriteLine("");
+                Console.WriteLine($"{Nombre} ha subido al nivel {Nivel}!");
+                Console.WriteLine($"¡{Nombre} ha sido bonificado!");
+                Console.WriteLine("");
+                Console.WriteLine($"Salud máxima aumentada en {bonoSalud} puntos");
+                Console.WriteLine($"Velocidad aumentada en {bonoVelocidad} puntos");
+                Console.WriteLine($"Destreza aumentada en {bonoDestreza} puntos");
+                Console.WriteLine($"Fuerza aumentada en {bonoFuerza} puntos");
+                Console.WriteLine($"Armadura aumentada en {bonoArmadura} puntos");
+                Console.WriteLine("");
+                Pantalla.pantallaInicio.PresionarParaContinuar();
             }
+        }
+        private double ObtenerPorcentajeAleatorio(int porcentaje)
+        {
+            Random rand = new Random();
+            double porcentajeDecimal = rand.Next(5, 16) / 100.0;
+            double porcentajeTotal = porcentaje + (porcentaje * porcentajeDecimal);
+            return porcentajeTotal;
+        }
     }
     class EntrenadoresJson
     {
@@ -267,7 +306,10 @@ namespace Personajes
             pokemon.Fuerza = CalcularValorAleatorio(pokemonPlayer.Fuerza);
             pokemon.Nivel = CalcularValorAleatorio(pokemonPlayer.Nivel);
             pokemon.Armadura = CalcularValorAleatorio(pokemonPlayer.Armadura);
-            pokemon.Salud = 100;
+            pokemon.SaludMax = CalcularValorAleatorio(pokemonPlayer.SaludMax);
+            pokemon.Salud = pokemon.SaludMax;
+            pokemon.XpActual = 0;// No le asigno por que no son utiles
+            pokemon.XpMax = 0;// 
 
             var movesActuales = new List<Move>();
             movesActuales = pokeApi.Moves.OrderBy(x => Guid.NewGuid()).Take(4).ToList();
@@ -285,7 +327,7 @@ namespace Personajes
             pokemon.MovimientosPosibles = listaMoves;
             pokemon.MovimientosActuales = listaMovActuales;
             return pokemon;
-            
+
         }
         private static int CalcularValorAleatorio(int valorBase)
         {
@@ -309,7 +351,10 @@ namespace Personajes
             pokemon.Fuerza = rand.Next(1, 10);
             pokemon.Nivel = 1;
             pokemon.Armadura = rand.Next(1, 10);
+            pokemon.SaludMax = 100;
             pokemon.Salud = 100;
+            pokemon.XpActual = 0;// No le asigno por que no son utiles
+            pokemon.XpMax = 100;// 
 
 
             var movesActuales = new List<Move>();

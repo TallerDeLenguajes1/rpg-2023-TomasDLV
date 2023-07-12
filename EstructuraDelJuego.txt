@@ -44,3 +44,9 @@ Características principales:
 
 Objetivo del juego: El objetivo principal del juego "Pokémon Battle Console" es que los jugadores mejoren a su Pokémon a través de batallas, ganen experiencia y se conviertan en un entrenador Pokémon poderoso.
 
+----------------Comentarios del conbate -------------------
+
+Bulbasaur Ha relizado un ataque "Mega Puño" causando 40 de daño.
+Rattata Utilizo su ataque "Placaje" causando 90 de daño.
+
+Entrenador TomasDLV: "¡Bulbasaur, yo te Elijo!

@@ -304,7 +304,7 @@ namespace Personajes
             pokemon.Velocidad = CalcularValorAleatorio(pokemonPlayer.Velocidad);
             pokemon.Destreza = CalcularValorAleatorio(pokemonPlayer.Destreza);
             pokemon.Fuerza = CalcularValorAleatorio(pokemonPlayer.Fuerza);
-            pokemon.Nivel = CalcularValorAleatorio(pokemonPlayer.Nivel);
+            pokemon.Nivel = CalcularValorAleatorio(pokemonPlayer.Nivel) + 1;
             pokemon.Armadura = CalcularValorAleatorio(pokemonPlayer.Armadura);
             pokemon.SaludMax = CalcularValorAleatorio(pokemonPlayer.SaludMax);
             pokemon.Salud = pokemon.SaludMax;

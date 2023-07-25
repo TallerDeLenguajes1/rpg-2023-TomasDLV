@@ -14,7 +14,7 @@ namespace claseJugar
             int bandera = 0;
 
             PokemonInfo pPlayer = player.Pokemon;
-            PokemonInfo pRival = player.Pokemon;
+            PokemonInfo pRival = rival.Pokemon;
 
             ComentariosDeBatalla.ComentarInicio(player, rival);
 
@@ -22,9 +22,11 @@ namespace claseJugar
             {
 
                 Batalla.Atacar(pPlayer, pRival);
+
                 if (pRival.Salud > 0)
                 {
                     Batalla.Atacar(pRival, pPlayer);
+
                     if (pPlayer.Salud <= 0)
                     {
                         Console.WriteLine($"Ganador... {pRival.Nombre} !!");
@@ -64,23 +66,16 @@ namespace claseJugar
         public static void Atacar(PokemonInfo atacante, PokemonInfo defensor)
         {
             Random rand = new Random();
-            //int efectividad = rand.Next(1, 100);
-            int ataque = atacante.Destreza * atacante.Fuerza * atacante.Nivel;
+            int efectividad = rand.Next(1, 100);
+            int ataque = atacante.Destreza * atacante.Fuerza ;//* atacante.Nivel;
             int defensa = defensor.Armadura * defensor.Velocidad;
 
-            const int Ajuste = 500;
-            //int dañoProvocado = (ataque * efectividad) - defensa / (Ajuste);
-
-            int dañoProvocado = (ataque / defensa) / Ajuste;
-            int dañoMaximo = (int)(defensor.Salud * 0.4); // Daño máximo limitado al 40% de la salud actual del defensor
+            double Ajuste = (double)defensor.SaludMax/(ataque*100-defensa);
+            int dañoProvocado = (int)(((ataque * efectividad) - defensa) * (Ajuste));
 
             if (dañoProvocado < 0)
             {
                 dañoProvocado = 0;
-            }
-            else if (dañoProvocado > dañoMaximo)
-            {
-                dañoProvocado = dañoMaximo;
             }
 
             defensor.Salud -= dañoProvocado;
